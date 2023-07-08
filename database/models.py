@@ -52,7 +52,7 @@ class ServiceCategory(Base):
 class Service(Base):
     __tablename__ = 'services'
     service_id = Column(Integer, autoincrement=True, primary_key=True)
-    srvice_category = Column(Integer, ForeignKey('service_categories.category_id'), nullable=False)
+    service_category = Column(Integer, ForeignKey('service_categories.category_id'), nullable=False)
     service_name = Column(String, nullable=False)
     service_balance = Column(Float)
     service_check = Column(Integer, nullable=False)

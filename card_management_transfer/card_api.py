@@ -56,7 +56,7 @@ async def get_exact_or_all_cards_api(user_id:int, card:int=0):
 
 #Мониторинг карты
 @app.get('/get_card_monitoring')
-async def get_exact_all_card_monitoring_api(user_id:int, card:int=0):
-    result = get_all_cards_or_exact_transactions_db(user_id, card)
+async def get_exact_all_card_monitoring_api(card:int=0):
+    result = get_all_cards_or_exact_transactions_db(card)
 
     return {"status": 1, "card_monitoring": result}

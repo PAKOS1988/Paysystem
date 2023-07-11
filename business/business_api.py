@@ -13,9 +13,9 @@ async def register_business_category_api(name: str):
 # Регистрация бизнеса
 @app.post('/register-business')
 async def register_business_api(category_id: int, name: str, card_number: int):
-    result = register_business_db(category_id=category_id,
-                                  name=name,
-                                  card_number=card_number)
+    result = register_business_db(service_category=category_id,
+                                  service_name=name,
+                                  service_check=card_number)
 
     return {"status": 1, "message": result}
 

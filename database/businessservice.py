@@ -12,11 +12,11 @@ def register_business_category_db(name: str):
     return "Категория бизнеса успешно зарегистрирована"
 
 # Регистрация бизнеса
-def register_business_db(service_category: int, service_name: str, card_number: int):
+def register_business_db(service_category: int, service_name: str, service_check: int):
     db = next(get_db())
     new_business = Service(service_category=service_category,
                            service_name=service_name,
-                           service_check=card_number)
+                           service_check=service_check)
     db.add(new_business)
     db.commit()
 
@@ -28,7 +28,7 @@ def get_business_categories_db(exact_category_id: int = 0):
     if exact_category_id == 0:
         categories = db.query(ServiceCategory).all()
     else:
-        categories = db.query(ServiceCategory).filter_by(categoty_id=exact_category_id).all()
+        categories = db.query(ServiceCategory).filter_by(category_id=exact_category_id).all()
 
     return categories
 
@@ -36,7 +36,7 @@ def get_business_categories_db(exact_category_id: int = 0):
 def get_exact_business_db(business_id: int, category_id: int):
     db = next(get_db())
     business = db.query(Service).filter_by(service_id=business_id,
-                                           category_id=category_id).first()
+                                           service_category=category_id).first()
 
     if business:
         return business
@@ -46,7 +46,7 @@ def get_exact_business_db(business_id: int, category_id: int):
 # Оплата услуги
 def pay_for_service_db(business_id: int, from_card: int, amount: float):
     db = next(get_db())
-    transaction = Transaction(business_id=business_id,
+    transaction = Transaction(card_to=business_id,
                               card_id=from_card,
                               amount=amount)
     db.add(transaction)

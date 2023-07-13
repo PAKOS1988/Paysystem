@@ -10,7 +10,7 @@ otp_test = {}
 @app.post('/add_user_card')
 async def add_user_card_api(user_id:int, card_number:int, card_holder:str, card_name:str, exp_date:int, otp:int):
     # Проверка одноразового кода
-    if otp_test.get(user_id) == otp:
+    if otp_test.get(user_id) != otp: #Исправить после установки редис
         result = add_user_card_to_db(user_id=user_id,
                                       cardholder=card_holder,
                                       card_name=card_name,
